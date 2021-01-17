@@ -1,9 +1,4 @@
 from discord.ext import commands
-import json
-from pathlib import Path
-import pymysql.cursors
-from random import randint
-
 
 dices_results = {
     "green": ['test1', 'test2'],
