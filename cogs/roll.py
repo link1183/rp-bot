@@ -1,12 +1,6 @@
 import discord
 from discord.ext import commands
 import random
-import traceback
-from datetime import datetime
-import json
-from pathlib import Path
-from os import listdir
-from os.path import isfile, join
 from cogs.utils.Utilities import get_client, dices_results
 
 

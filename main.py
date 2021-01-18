@@ -1,7 +1,6 @@
 import discord
 from discord import colour
 from discord.ext import commands
-import json
 from pathlib import Path
 from os import listdir
 from os.path import isfile, join
@@ -67,7 +66,7 @@ async def on_ready():
     channel = client.get_channel(771496855044882463)
     embed = discord.Embed(title='Bot is now ready', description=discord.Embed.Empty, colour=discord.Color.dark_blue())
     await channel.send(embed=embed)
-    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name='Waiting for RP to start'))
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.competing, name='THIS IS A TEST'))
 
 
 client.run('NzcxNDk2MDE3NTY4ODU4MTI0.X5s9qA.8oy-vA2830IoJhq6eCsDl7AjTik', bot=True, reconnect=True)
