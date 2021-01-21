@@ -18,7 +18,7 @@ class WhiteDiceCog(commands.Cog):
         white_color = "#FFFFFF"
         emojis=['1️⃣','2️⃣','3️⃣','4️⃣','5️⃣','6️⃣','7️⃣','8️⃣','9️⃣']
         readableHex = int(hex(int(white_color.replace("#", ""), 16)), 0)
-        embed=Embed(title="Dés blancs",
+        embed=Embed(title=":white_medium_square: Dés blancs",
                     description="Réagissez avec le nombre de dés que vous voulez lancer",
                     colour=readableHex
                     )
