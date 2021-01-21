@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from cogs.utils.Utilities import get_client
+from cogs.utils.utilitiesBot import get_client
 
 
 class TGCMCog(commands.Cog, name='Commande +tgcm'):
