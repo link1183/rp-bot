@@ -1,29 +1,50 @@
+# made by : https://github.com/jubnl
+
 import discord
-from discord import colour
 from discord.ext import commands
+import json
 from pathlib import Path
 from os import listdir
 from os.path import isfile, join
 from datetime import datetime
 import traceback
 
-client = commands.Bot(command_prefix='+')
+
+# get path for config file
+mod_path = Path(__file__).parent
+relative_path = 'assets/config/config_bot.json'
+config_bot_json = (mod_path / relative_path).resolve()
+
+# load config file in `config`
+with open(config_bot_json,'r') as js_config:
+    config = json.load(js_config)
+
+# create bot instance
+client = commands.Bot(command_prefix=[config['prefix']])
+
+client.remove_command("help")
 
 # get path for cogs
-mod_path = Path(__file__).parent
 relative_path_cogs = 'cogs/'
 cogs_folder = (mod_path / relative_path_cogs).resolve()
 
 # retrive all cogs files
 cogs_files = [f"cogs.{f[:-3]}" for f in listdir(cogs_folder) if isfile(join(cogs_folder, f))]
+print(cogs_files)
+
 
 if __name__ == '__main__':
     for extension in cogs_files:
         try:
             client.load_extension(extension)
-        except Exception:
+            print(f"TRY TO LOAD {extension}")
+        except Exception as e:
+            print(e)
             # A FAIRE : AJOUTER UN PUTAIN DE SYSTEME DE LOG POUR LOAD LES EXTENSIONS C'EST CHIANT DE PASSER PAR PUTTY
             traceback.print_exc()
+            continue
+        print(f"LOADED {extension}")
+
 
 
 @client.event
@@ -41,7 +62,7 @@ async def on_command_error(ctx, error):
         await ctx.send('Vous n\'avez pas le rôle requis !',delete_after=5)
 
     elif isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send(f'Il manque un argument !',delete_after=5)
+        await ctx.send(f'Il manque un argument ! Tapez la commande `+help {(ctx.message.content.split(" ", 1)[0])[1:]}`',delete_after=5)
 
     elif isinstance(error, commands.MissingPermissions):
         await ctx.send('Vous n\'avez pas la permission d\'executer cette commande !',delete_after=5)
@@ -62,11 +83,10 @@ async def on_command_error(ctx, error):
 
 @client.event
 async def on_ready():
-    print('bot ready')
     channel = client.get_channel(771496855044882463)
     embed = discord.Embed(title='Bot is now ready', description=discord.Embed.Empty, colour=discord.Color.dark_blue())
     await channel.send(embed=embed)
-    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.competing, name='THIS IS A TEST'))
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name=config['waiting']))
 
 
-client.run('NzcxNDk2MDE3NTY4ODU4MTI0.X5s9qA.8oy-vA2830IoJhq6eCsDl7AjTik', bot=True, reconnect=True)
+client.run(config['token'], bot=True, reconnect=True)
