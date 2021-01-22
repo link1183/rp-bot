@@ -2,30 +2,27 @@
 
 from discord.ext import commands
 from cogs.utils.utilitiesBot import get_client
-from discord import Embed
+from discord import Embed, Color
 from random import choice
 
 
-class WhiteDiceCog(commands.Cog):
+class GreenDiceCog(commands.Cog,name="command green"):
 
     def __init__(self, client):
         self.client = client
 
     client = get_client()
 
-    @client.command(name="white",description="message for white dices")
-    async def white(self,ctx):
+    @client.command(name="green",description="message for green dices")
+    async def green(self,ctx):
         await ctx.message.delete()
-        white_color = "#FFFFFF"
         emojis=['1️⃣','2️⃣','3️⃣','4️⃣','5️⃣','6️⃣','7️⃣','8️⃣','9️⃣']
-        readableHex = int(hex(int(white_color.replace("#", ""), 16)), 0)
-        embed=Embed(title=":white_medium_square: Dés blancs",
+        embed=Embed(title=":green_square: Dés verts",
                     description="Réagissez avec le nombre de dés que vous voulez lancer",
-                    colour=readableHex
+                    colour=Color.green()
                     )
-        
-        embed.add_field(name="Résultats possibles :", value="⚪ : 16.66% de chance\n⚫ : 50% de chance\n⚪⚪ : 25% de chance\n⚫⚫ : 8.33% de chance")
 
+        embed.add_field(name="Résultats possibles :",value="1x Avantage : 37.5% de chance\n2x Avantage : 12.5% de chance\n1x Avantage + 1x Réussite : 12.5% de chance\n1x Réussite : 12.5% de chance\n2x Réussite : 12.5% de chance\n1x Rien : 12.5% de chance")
         react = await ctx.send(embed=embed)
 
         for emoji in emojis:
@@ -35,7 +32,7 @@ class WhiteDiceCog(commands.Cog):
     @commands.Cog.listener(name="on_raw_reaction_add")
     async def on_raw_reaction_add(self,payload):
         message_id = payload.message_id
-        if message_id == 801919469848625163 :
+        if message_id == 802142991619850250 :
             
             if payload.emoji.name == '1️⃣':
                 count = 1
@@ -66,18 +63,32 @@ class WhiteDiceCog(commands.Cog):
 
 
 
-            dices = ['⚪','⚪','⚪⚪','⚪⚪','⚪⚪','⚫','⚫','⚫','⚫','⚫','⚫','⚫⚫']
+            dices = ['Réussite', 'Avantage', 'Avantage', 'Avantage', 'Double avantage', 'Double réussite', 'Avantage/réussite', 'Rien']
 
             value = ""
 
-            for i in range(count):
-                value+=f"Lancé {i+1} : {choice(dices)}\n"
+            reussites = 0
+            avantages = 0
 
-            white_color = "#FFFFFF"
-            readableHex = int(hex(int(white_color.replace("#", ""), 16)), 0)
+            for i in range(count):
+                rand_choice = choice(dices)
+                value+=f"Lancé {i+1} : {rand_choice}\n"
+                if rand_choice == "Réussite":
+                    reussites+=1
+                elif rand_choice == "Avantage":
+                    avantages+=1
+                elif rand_choice == "Double réussite":
+                    reussites+=2
+                elif rand_choice == "Double avantage":
+                    avantages+=2
+                elif rand_choice == "Avantage/réussite":
+                    avantages+=1
+                    reussites+=1
             
-            embed = Embed(title=f":white_medium_square: Lancé de dés blanc pour {member.display_name}",colour=readableHex)
+
+            embed = Embed(title=f":green_square: Lancé de dés verts pour {member.display_name}",colour=Color.green())
             embed.add_field(name=f"Nombre de dés lancés : {count}",value=value)
+            embed.add_field(name="Résultats :",value=f"Réussites : {reussites}\nAvantages : {avantages}")
 
             channel = self.client.get_channel(801793957062639666)
 
@@ -86,4 +97,4 @@ class WhiteDiceCog(commands.Cog):
 
 
 def setup(client):
-    client.add_cog(WhiteDiceCog(client))
+	client.add_cog(GreenDiceCog(client))
