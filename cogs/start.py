@@ -1,5 +1,5 @@
 from discord.ext import commands
-from discord import Embed, Activity, Color
+from discord import Embed, Activity, ActivityType, Color
 from cogs.utils.utilitiesBot import get_client, get_config
 
 
