@@ -7,11 +7,11 @@ class StartCog(commands.Cog):
         self.client = client
     
     
-    self.client = get_client()
-    self.config = get_config()
+    client = get_client()
+    config = get_config()
     
     
-    @self.client.command()
+    @client.command()
     async def start(self, ctx):
         embed = discord.Embed(title=f'Activity changed to {config['playing']}', description=discord.Embed.Empty, colour=discord.Color.dark_blue())
         await ctx.send(embed=embed)
