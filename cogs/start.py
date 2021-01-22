@@ -9,15 +9,16 @@ class StartCog(commands.Cog):
     
     
     client = get_client()
-    config = get_config()
+    
     
     
     @client.command()
     async def start(self, ctx):
-        embed = Embed(title=f'Activity changed to {config['playing']}', description=Embed.Empty, colour=Color.dark_blue())
+        config = get_config()
+        embed = Embed(title=f'Activity changed to {config["playing"]}', description=Embed.Empty, colour=Color.dark_blue())
         await ctx.send(embed=embed)
-        await client.change_presence(activity=Activity(type=ActivityType.playing, name=config['starting']))
+        await self.client.change_presence(activity=Activity(type=ActivityType.playing, name=config['starting']))
 
 
 def setup(client):
-    cliend.add_cog(client)
+    client.add_cog(client)

@@ -9,15 +9,14 @@ class StopCog(commands.Cog):
     
     
     client = get_client()
-    config = get_config()
-    
-    
+
     @client.command(name='stop', description="Change l'activité du bot")
     async def stop(self, ctx):
-        embed = Embed(title=f'Activity changed to {config['waiting']}', description=Embed.Empty, colour=Color.dark_blue())
+        config = get_config()
+        embed = Embed(title=f'Activity changed to {config["waiting"]}', description=Embed.Empty, colour=Color.dark_blue())
         await ctx.send(embed=embed)
-        await client.change_presence(activity=Activity(type=ActivityType.playing, name=config['waiting']))
+        await self.client.change_presence(activity=Activity(type=ActivityType.playing, name=config['waiting']))
 
 
 def setup(client):
-    cliend.add_cog(client)
+    client.add_cog(StopCog(client))
