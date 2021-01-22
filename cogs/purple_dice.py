@@ -86,7 +86,7 @@ class GreenDiceCog(commands.Cog,name="command purple"):
                     reussites+=1
             
 
-            embed = Embed(title=f":purple_square: Lancé de dés verts pour {member.display_name}",colour=Color.purple())
+            embed = Embed(title=f":purple_square: Lancé de dés violets pour {member.display_name}",colour=Color.purple())
             embed.add_field(name=f"Nombre de dés lancés : {count}",value=value)
             embed.add_field(name="Résultats :",value=f"échecs : {reussites}\nDésavantages : {avantages}")
 
