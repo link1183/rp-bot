@@ -6,12 +6,16 @@ class StartCog(commands.Cog):
     def __init__(self, client):
         self.client = client
     
+    
     self.client = get_client()
     self.config = get_config()
     
-    embed = discord.Embed(title=f'Activity changed to {config['playing']}', description=discord.Embed.Empty, colour=discord.Color.dark_blue())
-    await ctx.send(embed=embed)
-    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name=config['starting']))
+    
+    @self.client.command()
+    async def start(self, ctx):
+        embed = discord.Embed(title=f'Activity changed to {config['playing']}', description=discord.Embed.Empty, colour=discord.Color.dark_blue())
+        await ctx.send(embed=embed)
+        await client.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name=config['starting']))
 
 
 def setup(client):
