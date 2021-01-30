@@ -37,7 +37,7 @@ class UnloadCog(commands.Cog, name="Commande !unload"):
                     files.append(f)
                 
                 files.remove("utilitiesBot")
-                channel = self.client.get_channel(769190738968838148)
+                channel = self.client.get_channel(771496855044882463)
                 for cog in files: 
                     cog = f"cogs.{cog}"
                     try:
@@ -47,7 +47,7 @@ class UnloadCog(commands.Cog, name="Commande !unload"):
                     except commands.ExtensionAlreadyLoaded:
                         await ctx.send(f"**`[{dt_string}] :` COG {cog[5:]} is ALREADY UNLOADED**")
                     except Exception as e:
-                        channel = self.client.get_channel(769190738968838148)
+                        channel = self.client.get_channel(771496855044882463)
                         embed=discord.Embed(description=f'```py\n{traceback.format_exc()}\n```')
                         embed.add_field(name=f"**`[{dt_string}] : FAILED TO UNLOAD` {cog[5:]}**",value=traceback.print_exc(file=sys.stdout))
                         await channel.send(embed=embed)
@@ -64,13 +64,13 @@ class UnloadCog(commands.Cog, name="Commande !unload"):
                 except commands.ExtensionAlreadyLoaded:
                     await ctx.send(f"**`[{dt_string}] :` COG {cog[5:]} is ALREADY UNLOADED**")
                 except Exception:
-                    channel = self.client.get_channel(769190738968838148)
+                    channel = self.client.get_channel(771496855044882463)
                     embed=discord.Embed(description=f'```py\n{traceback.format_exc()}\n```')
                     embed.add_field(name=f"**`[{dt_string}] : FAILED TO UNLOAD` {cog[5:]}**",value=traceback.print_exc(file=sys.stdout))
                     await channel.send(embed=embed)
                     #await sleep(0.75)
                 else:
-                    channel = self.client.get_channel(769190738968838148)
+                    channel = self.client.get_channel(771496855044882463)
                     await ctx.send(f'**`[{dt_string}] : SUCCESSFULLY UNLOADED COG`** **{cog[5:]}**',delete_after=10)
                     #await sleep(0.75)
 

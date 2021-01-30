@@ -39,7 +39,7 @@ class UserInfoCog(commands.Cog, name="Commande !userinfo"):
                     files.append(f)
 
                 #files.remove("load_cogs")
-                log = discord.utils.get(ctx.guild.channels, name="📦》logs")
+                log = self.client.get_channel(771496855044882463)
                 for cog in files: 
                     cog = f"cogs.{cog}"
                     try:
@@ -67,10 +67,9 @@ class UserInfoCog(commands.Cog, name="Commande !userinfo"):
                     self.client.load_extension(cog)
                 except Exception as e:
                     print(e)
-                    log = discord.utils.get(ctx.guild.channels, name="📦》logs")
                     embed=discord.Embed(description=f'```py\n{traceback.format_exc()}\n```')
                     embed.add_field(name=f"**`[{dt_string}] : FAILED TO RELOAD` {cog[5:]}**",value=traceback.print_exc(file=sys.stdout))
-                    await log.send(embed=embed)
+                    await ctx.send(embed=embed)
                     #await sleep(0.75)
                 else:
                     #log = discord.utils.get(ctx.guild.channels, name="📦》logs")
