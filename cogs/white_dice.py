@@ -1,7 +1,6 @@
 # made by : https://github.com/jubnl
 
 from discord.ext import commands
-from cogs.utils.utilitiesBot import get_client
 from discord import Embed
 from random import choice
 
@@ -11,18 +10,17 @@ class WhiteDiceCog(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    client = get_client()
 
-    @client.command(name="white",description="message for white dices")
+    @commands.command(name="white",description="message for white dices")
     async def white(self,ctx):
+
         await ctx.message.delete()
         white_color = "#FFFFFF"
         emojis=['1️⃣','2️⃣','3️⃣','4️⃣','5️⃣','6️⃣','7️⃣','8️⃣','9️⃣']
         readableHex = int(hex(int(white_color.replace("#", ""), 16)), 0)
         embed=Embed(title=":white_medium_square: Dés blancs",
                     description="Réagissez avec le nombre de dés que vous voulez lancer",
-                    colour=readableHex
-                    )
+                    colour=readableHex)
         
         embed.add_field(name="Résultats possibles :", value="⚪ : 16.66% de chance\n⚫ : 50% de chance\n⚪⚪ : 25% de chance\n⚫⚫ : 8.33% de chance")
 
@@ -34,7 +32,9 @@ class WhiteDiceCog(commands.Cog):
 
     @commands.Cog.listener(name="on_raw_reaction_add")
     async def on_raw_reaction_add(self,payload):
+
         message_id = payload.message_id
+        
         if message_id == 801919469848625163 :
             
             if payload.emoji.name == '1️⃣':

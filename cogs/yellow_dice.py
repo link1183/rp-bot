@@ -1,7 +1,6 @@
 # made by : https://github.com/jubnl
 
 from discord.ext import commands
-from cogs.utils.utilitiesBot import get_client
 from discord import Embed, Color
 from random import choice
 
@@ -11,16 +10,15 @@ class YellowDiceCog(commands.Cog,name="command yellow"):
     def __init__(self, client):
         self.client = client
 
-    client = get_client()
 
-    @client.command(name="yellow",description="message for yellow dices")
+    @commands.command(name="yellow",description="message for yellow dices")
     async def yellow(self,ctx):
+
         await ctx.message.delete()
         emojis=['1️⃣','2️⃣','3️⃣','4️⃣','5️⃣','6️⃣','7️⃣','8️⃣','9️⃣']
         embed=Embed(title=":yellow_square: Dés jaunes",
                     description="Réagissez avec le nombre de dés que vous voulez lancer",
-                    colour=Color.gold()
-                    )
+                    colour=Color.gold())
 
         embed.add_field(name="Résultats possibles :",value="2x Avantage : 0.08% de chance\n2x Avantage : 0.08% de chance\n2x Réussite : 0.08% de chance\n2x Réussite : 0.08% de chance\n1x Avantage : 0.08% de chance\n1x Avantage : 0.08% de chance\n1x Avantage + 1x Réussite : 0.08% de chance\n1x Avantage + 1x Réussite : 0.08% de chance\n1x Réussite : 0.08% de chance\n1x Réussite : 0.08% de chance\n1x Rien : 0.08% de chance\n1x Réussite critique : 0.08% de chance")
         react = await ctx.send(embed=embed)
@@ -31,7 +29,9 @@ class YellowDiceCog(commands.Cog,name="command yellow"):
 
     @commands.Cog.listener(name="on_raw_reaction_add")
     async def on_raw_reaction_add(self,payload):
+
         message_id = payload.message_id
+
         if message_id == 802199309092782120 :
             
             if payload.emoji.name == '1️⃣':
@@ -90,6 +90,7 @@ class YellowDiceCog(commands.Cog,name="command yellow"):
 
             embed = Embed(title=f":purple_square: Lancé de dés yellow pour {member.display_name}",colour=Color.gold())
             embed.add_field(name=f"Nombre de dés lancés : {count}",value=value)
+            
             if reussite_critique == 0:
                 embed.add_field(name="Résultats :",value=f"Réussites : {reussites}\nAvantages : {avantages}", inline=False)
             

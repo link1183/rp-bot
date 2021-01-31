@@ -20,16 +20,3 @@ def get_config():
 
     #retourne la config
     return config
-
-
-def get_client():
-    """Retourne le client, ne prends pas de paramètres"""
-
-    # obtient la config
-    config = get_config()
-
-    # set le client
-    client = commands.Bot(command_prefix=config['prefix'])
-
-    #retourne le client
-    return client

@@ -1,9 +1,7 @@
 # made by : https://github.com/jubnl
 
-from discord import Embed, Color
 from discord.ext import commands
 import sys
-from cogs.utils.utilitiesBot import get_client
 
 
 class RestartCog(commands.Cog, name="Commande !exit"):
@@ -11,11 +9,10 @@ class RestartCog(commands.Cog, name="Commande !exit"):
     def __init__(self, client):
         self.client = client
 
-    client = get_client()
-
     @commands.cooldown(1,10)
-    @client.command(name="restart",description=":\nrestart le bot", hidden=True)
+    @commands.command(name="restart",description=":\nrestart le bot", hidden=True)
     async def restart(self,ctx):
+        
         await ctx.send("Le bot va redémarrer, veuillez patienter quelques secondes...")
         sys.exit(0)
 

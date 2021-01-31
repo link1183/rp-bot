@@ -1,5 +1,4 @@
 from discord.ext import commands
-from cogs.utils.utilitiesBot import get_client
 
 
 class ClearCog(commands.Cog, name='Commande +clear'):
@@ -7,10 +6,9 @@ class ClearCog(commands.Cog, name='Commande +clear'):
     def __init__(self, client):
         self.client = client
 
-    client = get_client()
 
     @commands.has_permissions(manage_messages=True)
-    @client.command()
+    @commands.command()
     async def clear(self, ctx, amount=7):
         """
         @param ctx: context object

@@ -1,7 +1,6 @@
 # made by : https://github.com/jubnl
 
 from discord.ext import commands
-from cogs.utils.utilitiesBot import get_client
 from discord import Embed, Color
 from random import choice
 
@@ -11,10 +10,10 @@ class GreenDiceCog(commands.Cog,name="command green"):
     def __init__(self, client):
         self.client = client
 
-    client = get_client()
 
-    @client.command(name="green",description="message for green dices")
+    @commands.command(name="green",description="message for green dices")
     async def green(self,ctx):
+        
         await ctx.message.delete()
         emojis=['1️⃣','2️⃣','3️⃣','4️⃣','5️⃣','6️⃣','7️⃣','8️⃣','9️⃣']
         embed=Embed(title=":green_square: Dés verts",

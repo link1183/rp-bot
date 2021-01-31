@@ -1,7 +1,6 @@
 # made by : https://github.com/jubnl
 
 from discord.ext import commands
-from cogs.utils.utilitiesBot import get_client
 from discord import Embed, Color
 from random import choice
 
@@ -11,16 +10,15 @@ class GreenDiceCog(commands.Cog,name="command purple"):
     def __init__(self, client):
         self.client = client
 
-    client = get_client()
 
-    @client.command(name="purple",description="message for purple dices")
+    @commands.command(name="purple",description="message for purple dices")
     async def green(self,ctx):
+
         await ctx.message.delete()
         emojis=['1️⃣','2️⃣','3️⃣','4️⃣','5️⃣','6️⃣','7️⃣','8️⃣','9️⃣']
         embed=Embed(title=":purple_square: Dés violets",
                     description="Réagissez avec le nombre de dés que vous voulez lancer",
-                    colour=Color.purple()
-                    )
+                    colour=Color.purple())
 
         embed.add_field(name="Résultats possibles :",value="1x Désavantage : 37.5% de chance\n2x Désavantages : 12.5% de chance\n1x Désavantage + 1x échec : 12.5% de chance\n1x échec : 12.5% de chance\n2x échecs : 12.5% de chance\n1x Rien : 12.5% de chance")
         react = await ctx.send(embed=embed)
@@ -31,7 +29,9 @@ class GreenDiceCog(commands.Cog,name="command purple"):
 
     @commands.Cog.listener(name="on_raw_reaction_add")
     async def on_raw_reaction_add(self,payload):
+
         message_id = payload.message_id
+        
         if message_id == 802148451198173234 :
             
             if payload.emoji.name == '1️⃣':
