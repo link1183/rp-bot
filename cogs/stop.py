@@ -10,8 +10,10 @@ class StopCog(commands.Cog):
 
     @commands.command(name='stop', description="Change l'activité du bot")
     async def stop(self, ctx):
+        """Changes the activity of the bot."""
         
         await ctx.message.delete()
+
         config = get_config()
         embed = Embed(title=f'Activity changed to "{config["waiting"]}"', description=Embed.Empty, colour=Color.dark_blue())
         await ctx.send(embed=embed, delete_after=5)

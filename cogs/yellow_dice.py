@@ -13,8 +13,10 @@ class YellowDiceCog(commands.Cog,name="command yellow"):
 
     @commands.command(name="yellow",description="message for yellow dices")
     async def yellow(self,ctx):
+        """Send the message used by the listener for the yellow dice."""
 
         await ctx.message.delete()
+
         emojis=['1️⃣','2️⃣','3️⃣','4️⃣','5️⃣','6️⃣','7️⃣','8️⃣','9️⃣']
         embed=Embed(title=":yellow_square: Dés jaunes",
                     description="Réagissez avec le nombre de dés que vous voulez lancer",
@@ -29,6 +31,7 @@ class YellowDiceCog(commands.Cog,name="command yellow"):
 
     @commands.Cog.listener(name="on_raw_reaction_add")
     async def on_raw_reaction_add(self,payload):
+        """Listener for the reactions on the white dice message."""
 
         message_id = payload.message_id
 

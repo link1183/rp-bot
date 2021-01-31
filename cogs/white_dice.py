@@ -13,8 +13,10 @@ class WhiteDiceCog(commands.Cog):
 
     @commands.command(name="white",description="message for white dices")
     async def white(self,ctx):
+        """Send the message used by the listener for the white dice."""
 
         await ctx.message.delete()
+
         white_color = "#FFFFFF"
         emojis=['1️⃣','2️⃣','3️⃣','4️⃣','5️⃣','6️⃣','7️⃣','8️⃣','9️⃣']
         readableHex = int(hex(int(white_color.replace("#", ""), 16)), 0)
@@ -32,6 +34,7 @@ class WhiteDiceCog(commands.Cog):
 
     @commands.Cog.listener(name="on_raw_reaction_add")
     async def on_raw_reaction_add(self,payload):
+        """Listener for the reactions on the white dice message."""
 
         message_id = payload.message_id
         

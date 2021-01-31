@@ -9,6 +9,8 @@ class PingCog(commands.Cog, name='Commande +ping'):
     
     @commands.command()
     async def ping(self, ctx):
+        """Displays ping in an embed."""
+        
         embed = discord.Embed(title=':ping_pong: Pong !', description=f'**{round(self.client.latency * 1000)} ms.**', colour=discord.Color.red())
         await ctx.send(embed=embed)
 
