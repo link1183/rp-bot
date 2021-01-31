@@ -18,10 +18,11 @@ class LoadCog(commands.Cog, name="Commande !userinfo"):
     @commands.cooldown(1,10)
     @commands.command(name='load', hidden=True,description="[cog] :\nCharge le cog specifié")
     async def load(self, ctx, *, cog: str):
-        await ctx.message.delete()
         """Command which Loads a Module.
         Remember to use dot path. e.g: cogs.owner
         """
+
+        await ctx.message.delete()
 
         if ctx.author.id != 222775418590068736:
             now = datetime.now()
