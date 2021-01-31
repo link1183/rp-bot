@@ -98,3 +98,4 @@ class GreenDiceCog(commands.Cog,name="command green"):
 
 def setup(client):
 	client.add_cog(GreenDiceCog(client))
+    

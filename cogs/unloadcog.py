@@ -10,6 +10,7 @@ import traceback
 import sys
 from cogs.utils.utilitiesBot import get_client
 
+
 class UnloadCog(commands.Cog, name="Commande !unload"):
 
     def __init__(self, client):
@@ -51,15 +52,12 @@ class UnloadCog(commands.Cog, name="Commande !unload"):
                         embed=discord.Embed(description=f'```py\n{traceback.format_exc()}\n```')
                         embed.add_field(name=f"**`[{dt_string}] : FAILED TO UNLOAD` {cog[5:]}**",value=traceback.print_exc(file=sys.stdout))
                         await channel.send(embed=embed)
-                        #await sleep(0.75)
                     else:
                         await ctx.send(f'**`[{dt_string}] : SUCCESSFULLY UNLOADED COG`** **{cog[5:]}**',delete_after=10)
-                        #await sleep(0.75)
             else:
                 cog = f"cogs.{cog}"
                 try:
                     await ctx.send(f"**`[{dt_string}] : ATTEMPTING TO UNLOAD`** {cog[5:]}",delete_after=10)
-                    #await sleep(0.75)
                     self.client.unload_extension(cog)
                 except commands.ExtensionAlreadyLoaded:
                     await ctx.send(f"**`[{dt_string}] :` COG {cog[5:]} is ALREADY UNLOADED**")
@@ -68,11 +66,11 @@ class UnloadCog(commands.Cog, name="Commande !unload"):
                     embed=discord.Embed(description=f'```py\n{traceback.format_exc()}\n```')
                     embed.add_field(name=f"**`[{dt_string}] : FAILED TO UNLOAD` {cog[5:]}**",value=traceback.print_exc(file=sys.stdout))
                     await channel.send(embed=embed)
-                    #await sleep(0.75)
                 else:
                     channel = self.client.get_channel(771496855044882463)
                     await ctx.send(f'**`[{dt_string}] : SUCCESSFULLY UNLOADED COG`** **{cog[5:]}**',delete_after=10)
-                    #await sleep(0.75)
+
 
 def setup(client):
     client.add_cog(UnloadCog(client))
+    

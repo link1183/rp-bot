@@ -19,7 +19,6 @@ class UserInfoCog(commands.Cog, name="Commande !userinfo"):
 
     @commands.cooldown(1,10)
     @client.command(hidden=True,name="reload",description="[cog] :\nPermet de recharger un cog")
-    #@commands.has_role("Admin")
     async def reload(self, ctx, *, cog: str):
         """Command which Reloads a Module.
         Remember to use dot path. e.g: cogs.owner"""
@@ -38,13 +37,11 @@ class UserInfoCog(commands.Cog, name="Commande !userinfo"):
                     f = i[:size -3]
                     files.append(f)
 
-                #files.remove("load_cogs")
                 log = self.client.get_channel(771496855044882463)
                 for cog in files: 
                     cog = f"cogs.{cog}"
                     try:
                         await ctx.send(f"**`[{dt_string}] : ATTEMPTING TO RELOAD`** {cog[5:]}",delete_after=10)
-                        #await sleep(0.75)
                         self.client.unload_extension(cog)
                         self.client.load_extension(cog)
                     except commands.ExtensionAlreadyLoaded:
@@ -54,15 +51,12 @@ class UserInfoCog(commands.Cog, name="Commande !userinfo"):
                         embed=discord.Embed(description=f'```py\n{traceback.format_exc()}\n```')
                         embed.add_field(name=f"**`[{dt_string}] : FAILED TO RELOAD` {cog[5:]}**",value=traceback.print_exc(file=sys.stdout))
                         await log.send(embed=embed)
-                        #await sleep(0.75)
                     else:
                         await ctx.send(f'**`[{dt_string}] : SUCCESSFULLY RELOADED COG`** **{cog[5:]}**',delete_after=10)
-                        #await sleep(0.75)
             else:
                 cog = f"cogs.{cog}"
                 try:
                     await ctx.send(f"**`[{dt_string}] : ATTEMPTING TO RELOAD`** {cog[5:]}",delete_after=10)
-                    #await sleep(0.75)
                     self.client.unload_extension(cog)
                     self.client.load_extension(cog)
                 except Exception as e:
@@ -70,11 +64,9 @@ class UserInfoCog(commands.Cog, name="Commande !userinfo"):
                     embed=discord.Embed(description=f'```py\n{traceback.format_exc()}\n```')
                     embed.add_field(name=f"**`[{dt_string}] : FAILED TO RELOAD` {cog[5:]}**",value=traceback.print_exc(file=sys.stdout))
                     await ctx.send(embed=embed)
-                    #await sleep(0.75)
                 else:
-                    #log = discord.utils.get(ctx.guild.channels, name="📦》logs")
                     await ctx.send(f'**`[{dt_string}] : SUCCESSFULLY RELOADED COG`** **{cog[5:]}**',delete_after=10)
-                    #await sleep(0.75)
 
 def setup(client):
     client.add_cog(UserInfoCog(client))
+    

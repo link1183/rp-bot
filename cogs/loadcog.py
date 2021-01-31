@@ -9,6 +9,7 @@ from datetime import datetime
 import traceback
 from cogs.utils.utilitiesBot import get_client
 
+
 class LoadCog(commands.Cog, name="Commande !userinfo"):
 
     def __init__(self, client):
@@ -36,13 +37,11 @@ class LoadCog(commands.Cog, name="Commande !userinfo"):
                     f = i[:size -3]
                     files.append(f)
                 
-                #files.remove("load_cogs")
                 channel = self.client.get_channel(769190738968838148)
                 for cog in files: 
                     cog = f"cogs.{cog}"
                     try:
                         await ctx.send(f"**`[{dt_string}] : ATTEMPTING TO LOAD`** {cog[5:]}",delete_after=10)
-                        #await sleep(0.75)
                         self.client.load_extension(cog)
                     except commands.ExtensionAlreadyLoaded:
                         await ctx.send(f"**`[{dt_string}] :` COG {cog[5:]} is ALREADY LOADED**")
@@ -50,28 +49,21 @@ class LoadCog(commands.Cog, name="Commande !userinfo"):
                         embed=discord.Embed()
                         embed.add_field(name=f"**`[{dt_string}] : FAILED TO LOAD` {cog[5:]}**",value=f'```py\n{traceback.format_exc()}\n```')
                         await channel.send(embed=embed)
-                        #await sleep(0.75)
                     else:
                         await ctx.send(f'**`[{dt_string}] : SUCCESSFULLY LOADED COG`** **{cog[5:]}**',delete_after=10)
-                        #await sleep(0.75)
             else:
                 cog = f"cogs.{cog}"
                 try:
                     await ctx.send(f"**`[{dt_string}] : ATTEMPTING TO LOAD`** {cog[5:]}",delete_after=10)
-                    #await sleep(0.75)
                     self.client.load_extension(cog)
                 except commands.ExtensionAlreadyLoaded:
                     await ctx.send(f"**`[{dt_string}] :` COG {cog[5:]} is ALREADY LOADED**")
                 except Exception as e:
                     channel = self.client.get_channel(769190738968838148)
-                    # embed=discord.Embed()
-                    # embed.add_field(name=f"**`[{dt_string}] : FAILED TO LOAD` {cog[5:]}**",value=f'```py\n{traceback.format_exc()}\n```')
                     await channel.send(traceback.format_exc())
-                    # await channel.send(embed=embed)
-                    #await sleep(0.75)
                 else:
                     await ctx.send(f'**`[{dt_string}] : SUCCESSFULLY LOADED COG`** **{cog[5:]}**',delete_after=10)
-                    #await sleep(0.75)
+
 
 def setup(client):
     client.add_cog(LoadCog(client))

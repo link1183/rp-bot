@@ -22,3 +22,4 @@ class RestartCog(commands.Cog, name="Commande !exit"):
 
 def setup(client):
     client.add_cog(RestartCog(client))
+    

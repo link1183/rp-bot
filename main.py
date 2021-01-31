@@ -40,7 +40,6 @@ if __name__ == '__main__':
             print(f"TRY TO LOAD {extension}")
         except Exception as e:
             print(e)
-            # A FAIRE : AJOUTER UN PUTAIN DE SYSTEME DE LOG POUR LOAD LES EXTENSIONS C'EST CHIANT DE PASSER PAR PUTTY
             traceback.print_exc()
             continue
         print(f"LOADED {extension}")

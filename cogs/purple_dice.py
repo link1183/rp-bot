@@ -95,6 +95,6 @@ class GreenDiceCog(commands.Cog,name="command purple"):
             await channel.send(embed=embed)
 
 
-
 def setup(client):
 	client.add_cog(GreenDiceCog(client))
+    

@@ -23,3 +23,4 @@ class PerleCog(commands.Cog, name="Commande perle"):
 
 def setup(client):
     client.add_cog(PerleCog(client))
+    

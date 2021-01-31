@@ -16,3 +16,4 @@ class PingCog(commands.Cog, name='Commande +ping'):
 
 def setup(client):
     client.add_cog(PingCog(client))
+    

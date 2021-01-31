@@ -4,7 +4,7 @@ from discord.ext import commands
 from cogs.utils.utilitiesBot import get_client
 
 
-class TemplateCog(commands.Cog, name="Commande !template"):
+class TemplateCog(commands.Cog, name="Commande +template"):
 
     def __init__(self, client):
         self.client = client
@@ -16,6 +16,7 @@ class TemplateCog(commands.Cog, name="Commande !template"):
     async def template(self,ctx):
         await ctx.message.delete()
         pass
+
 
 def setup(client):
     client.add_cog(TemplateCog(client))

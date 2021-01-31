@@ -101,6 +101,6 @@ class YellowDiceCog(commands.Cog,name="command yellow"):
             await channel.send(embed=embed)
 
 
-
 def setup(client):
 	client.add_cog(YellowDiceCog(client))
+    
