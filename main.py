@@ -62,13 +62,13 @@ async def on_command_error(ctx, error):
         await ctx.send('Vous n\'avez pas le rôle requis !',delete_after=5)
 
     elif isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send(f'Il manque un argument ! Tapez la commande `+help {(ctx.message.content.split(" ", 1)[0])[1:]}`',delete_after=5)
+        await ctx.send(f'Il manque un argument ! Tapez la commande `+help {(ctx.message.content.split(" ", 1)[0])[1:]}`', delete_after=5)
 
     elif isinstance(error, commands.MissingPermissions):
-        await ctx.send('Vous n\'avez pas la permission d\'executer cette commande !',delete_after=5)
+        await ctx.send('Vous n\'avez pas la permission d\'executer cette commande !', delete_after=5)
 
     elif isinstance(error, commands.CommandOnCooldown):
-        await ctx.send(f'Veuillez réessayer dans {error.retry_after:.0f} secondes',delete_after=5)
+        await ctx.send(f'Veuillez réessayer dans {error.retry_after:.0f} secondes', delete_after=5)
 
     elif isinstance(error, commands.CommandError):
         embed = discord.Embed(title="Log :",timestamp=datetime.now(), description=trcError)
