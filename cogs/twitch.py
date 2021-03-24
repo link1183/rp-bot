@@ -26,8 +26,8 @@ class TwitchCog(commands.Cog, name='auto live message'):
         }
 
 
-        aut_call = requests.post(url=auth_URL, params=aut_params) 
-        access_token = aut_call.json()['access_token']
+        auth_call = requests.post(url=auth_URL, params=aut_params) 
+        access_token = auth_call.json()['access_token']
 
         head = {
             'Client-ID' : client_ID,
@@ -38,6 +38,10 @@ class TwitchCog(commands.Cog, name='auto live message'):
         channel = self.client.get_channel(823957275151564810)
         print(channel)
         await channel.send(r)
+        # if request != None
+        # error code != 200
+        # if channel None
+        # 
     
 
 def setup(client):
