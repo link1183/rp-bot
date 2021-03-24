@@ -77,15 +77,19 @@ async def on_command_error(ctx, error):
         embed.add_field(name="Commande envoyée :",value=ctx.message.content,inline=False)
         embed.add_field(name="Erreur :",value=error,inline=False)
         embed.set_thumbnail(url=ctx.author.avatar_url)
-        log = client.get_channel(771496855044882463)
-        await log.send(embed=embed)
+        log1 = client.get_channel(771496855044882463)
+        log2 = client.get_channel(823957275151564810)
+        await log1.send(embed=embed)
+        await log2.send(embed=embed)
         
 
 @client.event
 async def on_ready():
-    channel = client.get_channel(771496855044882463)
+    channel1 = client.get_channel(771496855044882463)
+    channel2 = client.get_channel(823957275151564810)
     embed = discord.Embed(title='Bot is now ready', description=discord.Embed.Empty, colour=discord.Color.dark_blue())
-    await channel.send(embed=embed)
+    await channel1.send(embed=embed)
+    await channel2.send(embed=embed)
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name=config['waiting']))
 
 
