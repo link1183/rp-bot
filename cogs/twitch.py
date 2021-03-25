@@ -2,6 +2,7 @@ from discord.ext import commands, tasks
 import requests
 from cogs.utils.utilitiesBot import get_config
 from discord.utils import get
+from discord import Embed, Color
 
 
 class TwitchCog(commands.Cog, name='auto live message'):
@@ -9,10 +10,12 @@ class TwitchCog(commands.Cog, name='auto live message'):
     def __init__(self, client):
         self.client = client
         self.config = get_config()
-        # self.is_live.start()
-    
+        self.status = 0
+        #self.is_live.start()
+        print('========== loop is starting ==========')
 
-    @tasks.loop(seconds=10.0)
+
+    @tasks.loop(minutes=5.0)
     async def is_live(self):
         URL = 'https://api.twitch.tv/helix/streams?user_login=link1183_'
         auth_URL = 'https://id.twitch.tv/oauth2/token'
@@ -33,19 +36,27 @@ class TwitchCog(commands.Cog, name='auto live message'):
             'Authorization' :  "Bearer " + access_token
         }
 
-        r = requests.get(URL, headers=head).json()['data'][0]
+        r = requests.get(URL, headers=head).json()['data']
         channel = self.client.get_channel(823957275151564810)
-        await channel.send(r)
 
-        if r == '[]' or r.status_code == 200:
+        if r == [] or r.status_code == 200:
+            self.status = 0
             return
         
         if channel is None:
             return
         
+        if self.status == 1:
+            return
+        
         title = r["title"]
         game_id = r["game_id"]
 
+        game_URL = f'https://api.twitch.tv/helix/games?id={game_id}'
+        game_r = requests.get(game_URL, headers=head).json()['data'][0]
+        game_name = game_r["name"]
+
+        await channel.send(r)
         
 
     @commands.command()
@@ -71,9 +82,9 @@ class TwitchCog(commands.Cog, name='auto live message'):
 
         r = requests.get(URL, headers=head).json()['data']
         channel = self.client.get_channel(823957275151564810)
+        await channel.send(r)
 
-        datas = [
-        {
+        datas = {
             "broadcaster_language": "en",
             "display_name": "a_seagull",
             "game_id": "506442",
@@ -85,7 +96,13 @@ class TwitchCog(commands.Cog, name='auto live message'):
             "thumbnail_url": "https://static-cdn.jtvnw.net/jtv_user_pictures/a_seagull-profile_image-4d2d235688c7dc66-300x300.png",
             "title": "a_seagull",
             "started_at": "2020-03-18T17:56:00Z"
-        }]
+        }
+        game_URL = f'https://api.twitch.tv/helix/games?id={506442}'
+        game_r = requests.get(game_URL, headers=head).json()['data'][0]
+        print(game_r)
+        game_name = game_r["name"]
+        await ctx.send(game_r)
+        await ctx.send(game_name)
     
 
 def setup(client):
