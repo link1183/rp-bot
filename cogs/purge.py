@@ -12,8 +12,7 @@ class PurgeCog(commands.Cog, name="Commande !purge"):
 
     @commands.cooldown(1,10)
     @commands.command(pass_context=True, name='purge', aliases=['purgemessages'], no_pm=True,description="(nb de messages) :\nPurge le nombre de messages specifiés")
-    @commands.has_role('DevBot')
-    async def ppurge(self,ctx,number=None):
+    async def purge(self,ctx,number=None):
         ctx.message.delete()
         if number == None:
             number = 1
