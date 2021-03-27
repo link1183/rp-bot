@@ -20,7 +20,8 @@ with open(config_bot_json,'r') as js_config:
     config = json.load(js_config)
 
 # create bot instance
-client = commands.Bot(command_prefix=[config['prefix']])
+intents = discord.Intents.all()
+client = commands.Bot(command_prefix=[config['prefix']], intents=intents)
 
 client.remove_command("help")
 

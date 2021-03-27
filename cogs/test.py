@@ -8,11 +8,7 @@ class TestCog(commands.Cog):
 
     @commands.command()
     async def test(self, ctx, blah='test'):
-        for i in ctx.message.attachments:
-            embed = discord.Embed()
-            embed.set_image(url=i.url)
-            await ctx.send(embed=embed)
-        await ctx.message.delete()
+        await ctx.send(ctx.author.guild.id)
 
     
 
