@@ -5,12 +5,10 @@ from discord.ext import commands
 class WelcomeCog(commands.Cog):
     def __init__(self, client):
         self.client = client
-        print('loaded')
 
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
-        print('triggered')
         channel = self.client.get_channel(733002044784246864)
         
         if channel is None or member is None:
