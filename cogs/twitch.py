@@ -31,7 +31,6 @@ class TwitchCog(commands.Cog, name='auto live message'):
         #========================================
         if request_link == None:
             self.status_link = 0
-            return
 
         else:
             title = request_link["title"]
@@ -51,9 +50,8 @@ class TwitchCog(commands.Cog, name='auto live message'):
             self.status_link = 1
         
         #========================================
-        if request_gen == 0:
+        if request_gen == None:
             self.status_gen = 0
-            return
 
         else:
             title = request_gen["title"]
@@ -75,7 +73,6 @@ class TwitchCog(commands.Cog, name='auto live message'):
         #========================================
         if request_jeez == None:
             self.status_jeez = 0
-            return
 
         else:
             title = request_jeez["title"]
@@ -87,17 +84,17 @@ class TwitchCog(commands.Cog, name='auto live message'):
                 print('dev channel not found')
                 return
         
-            if self.status_gen == 1:
+            if self.status_jeez == 1:
                 return
 
             await self.other_channel.send(message)
             print('Successfully sent message')
-            self.status_gen = 1
+            self.status_jeez = 1
 
         #========================================
         if request_shep == None:
             self.status_shep = 0
-            return
+
         else:    
             title = request_shep["title"]
             display_name = request_shep["user_name"]
@@ -160,7 +157,10 @@ class TwitchCog(commands.Cog, name='auto live message'):
         
     @commands.command()
     async def status(self, ctx):
-        await ctx.send(self.status)
+        await ctx.send(f'{self.status_link} for link')
+        await ctx.send(f'{self.status_shep} for shep')
+        await ctx.send(f'{self.status_jeez} for jeez')
+        await ctx.send(f'{self.status_gen} for genesis')
     
 
 def setup(client):
