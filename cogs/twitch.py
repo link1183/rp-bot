@@ -11,13 +11,19 @@ class TwitchCog(commands.Cog, name='auto live message'):
     def __init__(self, client):
         self.client = client
         self.config = get_config()
-        self.status = 0
-        self.is_live.start()
+        self.status_link = 0
+        self.status_shep = 0
+        self.status_gen = 0
+        self.status_jeez = 0
+        self.is_live_link.start()
+        self.is_live_shep.start()
+        self.is_live_gen.start()
+        self.is_live_jeez.start()
         print('========== loop is starting ==========')
 
 
-    @tasks.loop(seconds=20.0)
-    async def is_live(self):
+    @tasks.loop(minutes=1.0)
+    async def is_live_link(self):
         request = self.get_live('link1183_')
 
         if request == None:
@@ -69,10 +75,101 @@ class TwitchCog(commands.Cog, name='auto live message'):
             return
 
         if r == []:
-            self.status = 0
-            return
+            if streamer == 'link1183_':
+                self.status_link = 0
+                return
+            if streamer == 'genesis__z':
+                self.status_gen = 0
+                return
+            if streamer == 'rnjeez':
+                self.status_jeez = 0
+                return
+            if streamer == 'shepardeon':
+                self.status_shep = 0
+                return
 
         return r
+
+    
+    @tasks.loop(minutes=1.5)
+    async def is_live_shep(self):
+        request = self.get_live('shepardeon')
+
+        if request == None:
+            self.status_shep = 0
+            return
+                
+        title = request["title"]
+        display_name = request["user_name"]
+
+        message = f':tv: **{display_name}** is now live on Twitch! :tv:\nHe is streaming **{title}** at https://twitch.tv/{display_name}'
+
+        channel = self.client.get_channel(786543165444063274)
+
+        if channel is None:
+            print('dev channel not found')
+            return
+        
+        if self.status_shep == 1:
+            return
+
+        await channel.send(message)
+        print('Successfully sent message')
+        self.status_shep = 1
+
+
+    @tasks.loop(minutes=1.5)
+    async def is_live_gen(self):
+        request = self.get_live('genesis__z')
+
+        if request == None:
+            self.status_gen = 0
+            return
+                
+        title = request["title"]
+        display_name = request["user_name"]
+
+        message = f':tv: **{display_name}** is now live on Twitch! :tv:\nHe is streaming **{title}** at https://twitch.tv/{display_name}'
+
+        channel = self.client.get_channel(786543165444063274)
+
+        if channel is None:
+            print('dev channel not found')
+            return
+        
+        if self.status_gen == 1:
+            return
+
+        await channel.send(message)
+        print('Successfully sent message')
+        self.status_gen = 1
+
+
+    @tasks.loop(minutes=1.5)
+    async def is_live_jeez(self):
+        request = self.get_live('rnjeez')
+
+        if request == None:
+            self.status_jeez = 0
+            return
+                
+        title = request["title"]
+        display_name = request["user_name"]
+
+        message = f':tv: **{display_name}** is now live on Twitch! :tv:\nHe is streaming **{title}** at https://twitch.tv/{display_name}'
+
+        channel = self.client.get_channel(786543165444063274)
+
+        if channel is None:
+            print('dev channel not found')
+            return
+        
+        if self.status_jeez == 1:
+            return
+
+        await channel.send(message)
+        print('Successfully sent message')
+        self.status_jeez = 1
 
         
     @commands.command()
