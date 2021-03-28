@@ -14,6 +14,7 @@ class RoleCog(commands.Cog):
         embed = discord.Embed(title='Reaction Role', description=':video_game: React to get the <@&801859621009883186> role.', colour=discord.Color.blue())
         
         react = await ctx.send(embed=embed)
+        msg_id = ctx.message.id
 
         for i in emojis:
             await react.add_reaction(i)
@@ -41,7 +42,7 @@ class RoleCog(commands.Cog):
         if message_id == 825673141279653938:
             if payload.emoji.name == '🎮':
                 guild = discord.utils.get(self.client.guilds, id=payload.guild_id)
-                role = discord.utils.get(discord.utils.get(self.client.guilds, id=payload.guild_id).roles, id=801859621009883186)
+                role = discord.utils.get(guild.roles, id=801859621009883186)
                 user = guild.get_member(payload.user_id)
                 await user.remove_roles(role)
             
