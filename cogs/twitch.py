@@ -22,7 +22,7 @@ class TwitchCog(commands.Cog, name='auto live message'):
     @tasks.loop(minutes=1.0)
     async def is_live(self):
         request_link = self.get_live('link1183_')
-        request_jeez = self.get_live('rnjeez')
+        request_jeez = self.get_live('jeezheus')
         request_shep = self.get_live('shepardeon')
         request_gen = self.get_live('genesis__z')
         self.main_channel = self.client.get_channel(733001167763669012)
@@ -57,7 +57,7 @@ class TwitchCog(commands.Cog, name='auto live message'):
             title = request_gen["title"]
             display_name = request_gen["user_name"]
 
-            message = f':tv: **{display_name}** is now live on Twitch! :tv:\nHe is streaming **{title}** at https://twitch.tv/{display_name}'
+            message = f':tv: **{display_name}** is now live on Twitch! :tv:\nHe is streaming **{title}** at https://twitch.tv/{display_name} <@&826410777912410113>'
 
             if self.other_channel is None:
                 print('dev channel not found')
@@ -78,7 +78,7 @@ class TwitchCog(commands.Cog, name='auto live message'):
             title = request_jeez["title"]
             display_name = request_jeez["user_name"]
 
-            message = f':tv: **{display_name}** is now live on Twitch! :tv:\nHe is streaming **{title}** at https://twitch.tv/{display_name}'
+            message = f':tv: **{display_name}** is now live on Twitch! :tv:\nHe is streaming **{title}** at https://twitch.tv/{display_name} <@&826410777912410113>'
 
             if self.other_channel is None:
                 print('dev channel not found')
@@ -99,7 +99,7 @@ class TwitchCog(commands.Cog, name='auto live message'):
             title = request_shep["title"]
             display_name = request_shep["user_name"]
 
-            message = f':tv: **{display_name}** is now live on Twitch! :tv:\nHe is streaming **{title}** at https://twitch.tv/{display_name}'
+            message = f':tv: **{display_name}** is now live on Twitch! :tv:\nHe is streaming **{title}** at https://twitch.tv/{display_name} <@&826410777912410113>'
 
             if self.other_channel is None:
                 print('dev channel not found')

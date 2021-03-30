@@ -29,6 +29,10 @@ class RoleCog(commands.Cog):
             if payload.emoji.name == '🎮':
                 role = discord.utils.get(discord.utils.get(self.client.guilds, id=payload.guild_id).roles, id=801859621009883186)
                 await payload.member.add_roles(role)
+
+            elif payload.emoji.name == '📺':
+                role = discord.utils.get(discord.utils.get(self.client.guilds, id=payload.guild_id).roles, id=826410777912410113)
+                await payload.member.add_roles(role)
             
             else:
                 return
@@ -43,6 +47,12 @@ class RoleCog(commands.Cog):
             if payload.emoji.name == '🎮':
                 guild = discord.utils.get(self.client.guilds, id=payload.guild_id)
                 role = discord.utils.get(guild.roles, id=801859621009883186)
+                user = guild.get_member(payload.user_id)
+                await user.remove_roles(role)
+        
+            elif payload.emoji.name == '📺':
+                guild = discord.utils.get(self.client.guilds, id=payload.guild_id)
+                role = discord.utils.get(guild.roles, id=826410777912410113)
                 user = guild.get_member(payload.user_id)
                 await user.remove_roles(role)
             
