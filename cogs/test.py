@@ -1,16 +1,17 @@
 import discord
 from discord.ext import commands
+from cogs.utils.utilitiesBot import get_config
 
 
 class TestCog(commands.Cog):
     def __init__(self, client):
         self.client = client
+        self.config = get_config()
 
     @commands.command()
-    async def test(self, ctx, blah='test'):
-        await ctx.send(ctx.author.guild.id)
+    async def test(self, ctx):
+        await ctx.send(self.config)
 
-    
 
 def setup(client):
     client.add_cog(TestCog(client))
