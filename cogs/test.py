@@ -8,9 +8,11 @@ class TestCog(commands.Cog):
         self.client = client
         self.config = get_config()
 
+
     @commands.command()
     async def test(self, ctx):
         await ctx.send(self.config)
+        await ctx.send(self.config['message_sent']['link'])
 
 
 def setup(client):

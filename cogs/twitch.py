@@ -27,6 +27,10 @@ class TwitchCog(commands.Cog, name='auto live message'):
         request_gen = self.get_live('genesis__z')
         self.main_channel = self.client.get_channel(733001167763669012)
         self.other_channel = self.client.get_channel(786543165444063274)
+        self.is_sent_link = self.config['message_sent']['link']
+        self.is_sent_gen = self.config['message_sent']['gen']
+        self.is_sent_jeez = self.config['message_sent']['jeez']
+        self.is_sent_shep = self.config['message_sent']['shep']
 
         #========================================
         if request_link == None:
