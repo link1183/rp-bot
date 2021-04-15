@@ -15,6 +15,8 @@ class TwitchCog(commands.Cog, name='auto live message'):
         self.status_shep = 0
         self.status_gen = 0
         self.status_jeez = 0
+        self.status_sonorr = 0
+        self.status_lise = 0
         self.is_live.start()
         print('========== loop is starting ==========')
 
@@ -25,6 +27,8 @@ class TwitchCog(commands.Cog, name='auto live message'):
         request_jeez = self.get_live('jeezheus')
         request_shep = self.get_live('shepardeon')
         request_gen = self.get_live('genesis__z')
+        request_sonorr = self.get_live('sonorr')
+        request_lise = self.get_live('lise_g')
         self.main_channel = self.client.get_channel(733001167763669012)
         self.other_channel = self.client.get_channel(786543165444063274)
         self.is_sent_link = self.config['message_sent']['link']
@@ -116,6 +120,48 @@ class TwitchCog(commands.Cog, name='auto live message'):
             print('Successfully sent message')
             self.status_shep = 1
 
+        #========================================
+        if request_sonorr == None:
+            self.status_sonorr = 0
+
+        else:    
+            title = request_sonorr["title"]
+            display_name = request_sonorr["user_name"]
+
+            message = f':tv: **{display_name}** is now live on Twitch! :tv:\nHe is streaming **{title}** at https://twitch.tv/{display_name} <@&826410777912410113>'
+
+            if self.other_channel is None:
+                print('dev channel not found')
+                return
+        
+            if self.status_sonorr == 1:
+                return
+
+            await self.other_channel.send(message)
+            print('Successfully sent message')
+            self.status_sonorr = 1
+
+        #========================================
+        if request_lise == None:
+            self.status_lise = 0
+
+        else:    
+            title = request_lise["title"]
+            display_name = request_lise["user_name"]
+
+            message = f':tv: **{display_name}** is now live on Twitch! :tv:\nHe is streaming **{title}** at https://twitch.tv/{display_name} <@&826410777912410113>'
+
+            if self.other_channel is None:
+                print('dev channel not found')
+                return
+        
+            if self.status_lise == 1:
+                return
+
+            await self.other_channel.send(message)
+            print('Successfully sent message')
+            self.status_lise = 1
+
     
     def get_live(self, streamer):
         URL = f'https://api.twitch.tv/helix/streams?user_login={streamer}'
@@ -155,6 +201,13 @@ class TwitchCog(commands.Cog, name='auto live message'):
             if streamer == 'shepardeon':
                 self.status_shep = 0
                 return
+            if streamer == 'Sonorrr':
+                self.status_sonorr = 1
+                return
+            if streamer == 'lise_g':
+                self.status_lise = 1
+                return
+
 
         return r
 
@@ -165,6 +218,8 @@ class TwitchCog(commands.Cog, name='auto live message'):
         await ctx.send(f'{self.status_shep} for shep')
         await ctx.send(f'{self.status_jeez} for jeez')
         await ctx.send(f'{self.status_gen} for genesis')
+        await ctx.send(f'{self.status_sonorr} for sonorr')
+        await ctx.send(f'{self.status_lise} for lise')
     
 
 def setup(client):
