@@ -2,8 +2,7 @@ from discord.ext import commands, tasks
 import requests
 from cogs.utils.utilitiesBot import get_config
 from discord.utils import get
-from discord import Embed, Color
-from datetime import datetime
+from discord_slash import SlashContext, cog_ext
 
 
 class TwitchCog(commands.Cog, name='auto live message'):
@@ -75,11 +74,6 @@ class TwitchCog(commands.Cog, name='auto live message'):
                 return
 
         return r
-
-        
-    @commands.command()
-    async def status(self, ctx):
-        await ctx.send(f'{self.status}')
     
 
 def setup(client):

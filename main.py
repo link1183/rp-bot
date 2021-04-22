@@ -8,6 +8,7 @@ from os import listdir
 from os.path import isfile, join
 from datetime import datetime
 import traceback
+from discord_slash import SlashCommand
 
 
 # get path for config file
@@ -22,6 +23,7 @@ with open(config_bot_json,'r') as js_config:
 # create bot instance
 intents = discord.Intents.all()
 client = commands.Bot(command_prefix=[config['prefix']], intents=intents)
+slash = SlashCommand(client, override_type=True, sync_commands=True)
 
 client.remove_command("help")
 

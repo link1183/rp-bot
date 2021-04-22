@@ -1,6 +1,7 @@
 from discord.ext import commands
 from discord import Embed, Activity, ActivityType, Color
 from cogs.utils.utilitiesBot import get_config
+from discord_slash import cog_ext, SlashContext
 
 
 class StartCog(commands.Cog):
@@ -8,11 +9,9 @@ class StartCog(commands.Cog):
     def __init__(self, client):
         self.client = client
     
-    @commands.command()
-    async def start(self, ctx):
+    @cog_ext.cog_slash(name='start', description="Change l'activité du bot", guild_ids=[769252209090625566])
+    async def start(self, ctx: SlashContext):
         """Changes the activity of the bot."""
-
-        await ctx.message.delete()
 
         config = get_config()
         embed = Embed(title=f'Activity changed to "{config["starting"]}"', description=Embed.Empty, colour=Color.dark_blue())
