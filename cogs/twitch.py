@@ -42,6 +42,11 @@ class TwitchCog(commands.Cog, name='auto live message'):
             print('Successfully sent message')
             self.status = 1
 
+        
+    @commands.command()
+    async def status(self, ctx):
+        await ctx.send(self.status)
+
     
     def get_live(self, streamer):
         URL = f'https://api.twitch.tv/helix/streams?user_login={streamer}'
