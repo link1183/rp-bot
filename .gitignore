@@ -3,3 +3,4 @@ assets/config/config_bot.json
 cogs/test.py
 cogs/commands.py
 cogs/answer.py
+requirements.txt
