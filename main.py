@@ -89,7 +89,6 @@ async def on_command_error(ctx, error):
 @client.event
 async def on_ready():
     channel = client.get_channel(873663828775276614)
-    print(channel)
     message = discord.utils.get(await channel.history(limit=100).flatten(), id=config['restart_message_id'])
     embed = discord.Embed(title='Bot is now ready', description=discord.Embed.Empty, colour=discord.Color.dark_blue(), timestamp=datetime.now())
     await message.edit(content=None, embed=embed)
