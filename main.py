@@ -88,11 +88,12 @@ async def on_command_error(ctx, error):
 
 @client.event
 async def on_ready():
-    channel1 = client.get_channel(771496855044882463)
-    channel2 = client.get_channel(823957275151564810)
-    embed = discord.Embed(title='Bot is now ready', description=discord.Embed.Empty, colour=discord.Color.dark_blue())
-    await channel1.send(embed=embed)
-    await channel2.send(embed=embed)
+    channel = client.get_channel(873663828775276614)
+    print(channel)
+    message = discord.utils.get(await channel.history(limit=100).flatten(), id=config['restart_message_id'])
+    embed = discord.Embed(title='Bot is now ready', description=discord.Embed.Empty, colour=discord.Color.dark_blue(), timestamp=datetime.now())
+    await message.edit(content=None, embed=embed)
+
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name=config['waiting']))
 
 
