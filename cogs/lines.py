@@ -15,10 +15,8 @@ class LinesCog(commands.Cog, name='Commande !lines'):
     @commands.command(name='lines', description='Affiche le nombre de lignes de codes total de l\'ensemble des fichiers du bot')
     async def line(self, ctx):
 
-        #def is_invoke(m):
-        #    return m.id == ctx.message.id
-        #await ctx.channel.purge(limit=1, check=is_invoke)
         await ctx.message.delete()
+        
         # get path for cogs
         mod_path = Path(__file__).parent.parent
 

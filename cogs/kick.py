@@ -16,19 +16,24 @@ class KickCog(commands.Cog, name="Commande !kick"):
     @commands.has_permissions(kick_members=True)
     async def kick(self, ctx, member: discord.Member, *, reason=None):
         """commande pour kick les membres"""
+
         await ctx.message.delete()
 
-        
         if reason is None:
             reason = 'No specified reason.'
 
+        # Confirmation embed
         embed = discord.Embed(title=fr'{member} was successfully kicked.',
                             description='', colour=discord.Color.red())
         embed.set_thumbnail(url=member.avatar_url)
         embed.add_field(name="Reason:",value=reason)
+
         await member.kick(reason=reason)
         await ctx.channel.send(embed=embed)
+
         channel = discord.utils.get(member.guild.channels, id=734427047404765267)
+
+        # Log embed
         embed = discord.Embed(title='Kick log', description='', colour=discord.Color.red())
         embed.add_field(name='From:', value=fr'{ctx.message.author}', inline=False)
         embed.add_field(name='On:', value=fr'{member}', inline=False)

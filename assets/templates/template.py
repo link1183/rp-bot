@@ -11,7 +11,7 @@ class TemplateCog(commands.Cog, name="Commande +template"):
 
     client = get_client()
 
-    @commands.cooldown(1,10) # N'ENLEVEZ CETTE LIGNE EN AUCUN CAS
+    @commands.cooldown(1,10) # Don't remove this line
     @client.command(name="A remplir",description="A remplir")
     async def template(self,ctx):
         await ctx.message.delete()
